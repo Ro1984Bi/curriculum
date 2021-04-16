@@ -1,65 +1,132 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Layout from '../components/Layout';
+import {skills,experiences,projects} from '../profile';
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+const Index = () => (
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+<Layout>
+    {/**HeaderCard */}
+   <header className="row">
+      <div className="col-md-12">
+          <div className="card card-body bg-secondary text-light">
+              <div className="row">
+                  <div className="col-md-4">
+                      <img src="dev.jpg" alt="" className="img-fluid"/>  
+                  </div>
+                  <div className="col-md-8">
+                    <h1>Rodrigo Bilbao</h1> 
+                    <p>Freelance especializado en el mundo de la tecnologia especialmente en Javascript y sus frameworks.
+                        Y Python con sus respectivos frameworks Flask y Django ademas de Html 5 y CSS 3</p>
+                       <a href="/contratame">Contactame</a>  
+                  </div>
+              </div>
+          </div>
+         </div> 
+    </header>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+    {/**Second section */} 
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+    <div className="row py-2">
+        <div className="col-md-4">
+            <div className="card bg-light">
+                <div className="card-body">
+                   <h1>Skills</h1> 
+               {
+                   skills.map(({skill,percentage},i) => (
+                        <div className="py-3" key={i}>
+                            <h5>{skill}</h5>
+                            <div className="progress"> 
+                                <div
+                                 className="progress-bar" 
+                                 role="progressbar"
+                                 style={{ width: `${percentage}%` }} 
+                                 aria-valuenow="50" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+                                </div>
+                            </div>
+                        </div>
+                   ))
+               }
+
+                </div>
+            </div>
         </div>
-      </main>
+        <div className="col-md-8">
+            <div className="card bg-light">
+                <div className="card-body">
+                    <h1>Experience</h1>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+                        <ul>
+
+                            {
+
+                                experiences.map(({title,description,from,to}, index) => (
+                                <li key={index}>
+                                    <h3>{title}</h3>
+                                    <h5>{from} - {to}</h5>
+                                    <p>{description}</p> 
+
+                                </li>   
+                                ))
+
+                            }
+
+
+
+
+                        </ul>
+
+
+
+                </div>
+            </div>
+        </div>
     </div>
-  )
-}
+
+                            {/**Portafolio */}
+                            <div className="row">
+                                <div className="col-md-12"> 
+                                    <div className="card card-body bg-dark">
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <h1 className="text-center text-light">Portafolio</h1>
+                                            </div>
+                                        {
+
+                                            projects.map(({name,description,image}, i) => (
+                                            <div className="col-md-4 P-2" key={i}>
+                                                <div className="card h-100">
+                                                    <div className="overflow">
+                                                    <img src={`/${image}`} alt=""  className="card-img-top"/>
+                                                    </div>
+                                                        
+                                                    <div className="card-body">
+                                                        <h3>{name}</h3>
+                                                        <p>{description}</p>
+                                                    </div>
+                                                </div>
+
+                                            </div> 
+                                            ))
+                                        }
+
+
+
+                                        </div>
+                                    </div>
+                                        <div className="col-md-12">
+                                           <div className="text-center">
+                                                
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </div>
+</Layout>
+
+)
+
+export default Index;
